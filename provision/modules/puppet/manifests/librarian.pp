@@ -29,4 +29,10 @@ class puppet::librarian {
     ensure => installed,
 	provider => 'gem'
   }
+  
+  exec { 'librarian-puppet':
+    command => '/usr/local/bin/librarian-puppet install --path=/etc/puppet/modules',
+	path => '/vagrant',
+	logoutput => true
+  }
 }

@@ -3,7 +3,9 @@
 #
 
 # self-manage the puppet master server
-node 'puppet' { }
+node 'puppet' {
+  class { 'nagios': }
+}
 
 ##### CLIENTS
 

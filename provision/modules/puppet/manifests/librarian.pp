@@ -30,9 +30,21 @@ class puppet::librarian {
 	provider => 'gem'
   }
   
+  file { '/tmp/librarian-puppet':
+    ensure => 'directory',
+  }
+  
+  file { '/tmp/librarian-puppet/Puppetfile':
+    source => '/vagrant/Puppetfile',
+	require => File['/tmp/librarian-puppet'],
+  }
+  
   exec { 'librarian-puppet':
     command => '/usr/local/bin/librarian-puppet install --path=/etc/puppet/modules',
-	path => '/vagrant',
-	logoutput => true
+    #command => '/usr/bin/whoami',
+	#'echo whoami && /usr/local/bin/librarian-puppet install --path=/etc/puppet/modules',
+	cwd => '/tmp/librarian-puppet',
+	logoutput => true,
+	require => File['/tmp/librarian-puppet/Puppetfile'],
   }
 }

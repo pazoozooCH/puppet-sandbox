@@ -10,3 +10,8 @@ hieraMsg5: Hiera Common Root Value Msg5
 
 # Define value of hieraMsg6 in common. We'll override this in the host specific file...
 helloworld::hiera::hieraMsg6: Hiera Common Value Msg6
+
+
+
+# nagios settings...
+contacts: No Contact

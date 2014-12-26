@@ -1,0 +1,23 @@
+contacts:
+  user:
+    alias: My Alias
+    email: user@email.com
+    group: myGroup
+
+contactgroups:
+  group:
+    alias: myGroup
+
+hostgroups:
+  - hostGroup1
+  - hostGroup2
+
+servicegroups:
+  - serviceGroup1
+  - serviceGroup2
+
+htpasswd:
+  key: val
+
+whitelist:
+  - whileList1

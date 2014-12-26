@@ -1,0 +1,3 @@
+---
+# Override value for Msg6 for client1
+helloworld::hiera::hieraMsg6: Hiera Client1 Value Msg6

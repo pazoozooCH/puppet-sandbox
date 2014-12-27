@@ -10,7 +10,8 @@ forge "https://forgeapi.puppetlabs.com"
 # modulefile
 
 # Modules used for Nagios setup
-mod 'dhoppe/nagios'
+# mod 'dhoppe/nagios'
+# mod 'DavidSchmitt/nagios'
 
 # A module from git
 # mod 'puppetlabs-ntp',

@@ -97,6 +97,10 @@ class puppet::server(
   service { 'puppetmaster':
     enable => true,
     ensure => running,
+	require => [
+	  File['/etc/puppet/manifests/nodes.pp', '/etc/puppet/hiera.yaml'],
+	  Package['puppetmaster'],
+	],
   }
   
   # Hiera configuration
@@ -106,6 +110,7 @@ class puppet::server(
     ensure  => present,
 	source  => '/vagrant/hiera.yaml',
 	replace => true,
+	require => File['/etc/puppet/hieradata'],
   }
   # Make symbolic link to /etc/hiera.yaml so we can use the hiera command without explicitly specifying a config file
   file { '/etc/hiera.yaml':

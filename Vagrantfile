@@ -33,7 +33,11 @@ Vagrant.configure("2") do |config|
       node_config.vm.provision :puppet do |puppet|
         puppet.manifests_path = 'provision/manifests'
         puppet.module_path = 'provision/modules'
+        puppet.options = "--verbose --debug"
       end
+	  
+	  # Enable and run the puppet agent
+	  node_config.vm.provision :shell, :path => "provision/shell/runPuppetAgent.sh"
     end
   end
 end

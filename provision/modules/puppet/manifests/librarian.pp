@@ -27,7 +27,8 @@ class puppet::librarian {
   
   package { ['librarian-puppet'] :
     ensure => installed,
-	provider => 'gem'
+	provider => 'gem',
+	require => Package['ruby-all-dev'],
   }
   
   file { '/tmp/librarian-puppet':
@@ -45,6 +46,9 @@ class puppet::librarian {
 	#'echo whoami && /usr/local/bin/librarian-puppet install --path=/etc/puppet/modules',
 	cwd => '/tmp/librarian-puppet',
 	logoutput => true,
-	require => File['/tmp/librarian-puppet/Puppetfile'],
+	require => [
+	  File['/tmp/librarian-puppet/Puppetfile'],
+	  Package['librarian-puppet'],
+	],
   }
 }

@@ -16,5 +16,7 @@ if $hostname == 'puppet' {
   class { 'puppet::server': 
     require => Class['networking'],
   }
-  # class { 'puppet::librarian': }
+  
+  # Provision librarian-puppet to handle puppet modules from puppet forge
+  class { 'puppet::librarian': }
 }

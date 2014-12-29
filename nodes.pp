@@ -4,6 +4,15 @@
 
 # self-manage the puppet master server
 node 'puppet.example.com' {
+  # Configure the DNS server
+  class { 'inftec::dns': }
+  
+  # Configure the DNS client
+  class { 'inftec::dns-client':
+	nameserver => '172.16.32.10',
+	domain => 'example.com',
+  }
+
   # Nagios Server
   class { 'nagios': }
   
@@ -28,6 +37,12 @@ node 'client1.example.com' {
   
   # Nagios Client
   class { 'nagios::nrpe':}
+  
+  # Configure the DNS client
+  class { 'inftec::dns-client':
+	nameserver => '172.16.32.10',
+	domain => 'example.com',
+  }
 }
 
 node 'client2.example.com' { }

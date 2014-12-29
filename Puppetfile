@@ -12,6 +12,7 @@ forge "https://forgeapi.puppetlabs.com"
 # Modules used for Nagios setup
 # mod 'dhoppe/nagios'
 # mod 'DavidSchmitt/nagios'
+mod 'ajjahn/dns'
 
 # A module from git
 # mod 'puppetlabs-ntp',

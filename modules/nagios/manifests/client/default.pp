@@ -1,9 +1,12 @@
 define nagios::client::default(
 	$address,
-	$cfgFile = "/etc/nagios3/conf.d/$name.cfg",
 ) {
+	$cfgFileBase = "/etc/nagios3/conf.d/$name"
+	$cfgFileHost = "${cfgFileBase}.cfg"
+	$cfgFileService = "${cfgFileBase}_service.cfg"
+	
 	nagios_host { $name:
-		target => $cfgFile,
+		target => $cfgFileHost,
 		#mode => '0644', # Not available in puppet 3.4...
 		ensure => present,
 		alias => $name,
@@ -14,8 +17,17 @@ define nagios::client::default(
 	}
 	
 	# Set mode of config file (in puppet 3.7, we could set the mode parameter, but that's not available for puppet 3.4...)
-	file { $cfgFile:
+	file { [$cfgFileHost, $cfgFileService]:
 		mode => '0644',
 		require => Nagios_host[ $name ],
+	}
+	
+	nagios_service { $name:
+		target => "${cfgFileService}",
+		host_name => $name,
+		service_description => 'Disk Space',
+		check_command => 'check_all_disks!20%!10%',
+		use => 'generic-service',
+		require => Nagios_host[$name],
 	}
 }

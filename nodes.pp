@@ -13,6 +13,10 @@ node 'puppet.example.com' {
 	domain => 'example.com',
   }
 
+  # Configure Apache
+  class { 'inftec::apache':
+  }
+  
   # Nagios Server
   class { 'nagios': }
   

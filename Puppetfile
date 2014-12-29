@@ -13,6 +13,7 @@ forge "https://forgeapi.puppetlabs.com"
 # mod 'dhoppe/nagios'
 # mod 'DavidSchmitt/nagios'
 mod 'ajjahn/dns'
+mod 'puppetlabs/apache'
 
 # A module from git
 # mod 'puppetlabs-ntp',

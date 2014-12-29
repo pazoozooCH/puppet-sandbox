@@ -6,13 +6,15 @@
 stage { 'pre': before => Stage['main'] }
 
 # class { 'repos':   stage => 'pre' }
-# class { 'vagrant': stage => 'pre' }
+class { 'vagrant': stage => 'pre' }
 
 # class { 'puppet': }
 class { 'puppet::client': }
 class { 'networking': }
 
 if $hostname == 'puppet' {
-  class { 'puppet::server': }
-  class { 'puppet::librarian': }
+  class { 'puppet::server': 
+    require => Class['networking'],
+  }
+  # class { 'puppet::librarian': }
 }

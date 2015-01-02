@@ -1,10 +1,18 @@
 # Set up Apache Web Server
 class inftec::apache {
-	class { '::apache': 
+	class { '::apache':
 		docroot => '/var/www/html', # Defaults to /var/www in Puppet
 		mpm_module => 'prefork', # Needed for the PHP mod
+		
+		 # Set up a default SSL vHost
+		default_ssl_vhost => true,
+		default_ssl_cert => '/etc/ssl/certs/ssl-cert-test.pem',
+		default_ssl_key => '/etc/ssl/private/ssl-cert-test.key',
+		
 		require => Package['nagios3'], # Make sure apache is configured after nagios
 	}
+	
+	# Set up an SSL vHost
 	
 	# Install PHP (needed by Nagios)
 	class {'::apache::mod::php':

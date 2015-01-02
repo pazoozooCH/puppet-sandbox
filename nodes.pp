@@ -7,6 +7,9 @@ node 'puppet.example.com' {
   # Configure the DNS server
   class { 'inftec::dns': }
   
+  # Configure SSL
+  class { 'inftec::ssl': }
+  
   # Configure the DNS client
   class { 'inftec::dns-client':
 	nameserver => '172.16.32.10',

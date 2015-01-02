@@ -1,4 +1,18 @@
-Description
+InfTec Puppet Sandbox
+=====================
+
+Nagios
+------
+
+* URL: http://172.16.32.10/nagios3/
+* Login: nagiosadmin/password
+	* Currently hardcoded in *modules/nagios/manifests/service.pp*
+
+
+
+
+
+Description (Original Project)
 ===========
 
 Puppet Sandbox is a multi-VM [Vagrant](http://vagrantup.com/)-based Puppet

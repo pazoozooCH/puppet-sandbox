@@ -1,0 +1,73 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 2 (0x2)
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=CH, ST=BE, L=Winterthur, O=inftec.ch, CN=inftec.ch CA/emailAddress=admin@inftec.ch
+        Validity
+            Not Before: Jan  3 19:17:48 2015 GMT
+            Not After : Dec 31 19:17:48 2024 GMT
+        Subject: C=CH, ST=BE, L=Winterthur, O=inftec.ch, CN=client1/emailAddress=admin@inftec.ch
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (1024 bit)
+                Modulus:
+                    00:d5:04:cc:33:c4:88:48:a7:ad:0a:f8:b3:90:b6:
+                    00:4e:7c:c2:99:ca:75:c1:8b:85:0e:f4:5c:63:41:
+                    f0:40:19:df:89:97:c9:2a:f3:32:63:89:7f:fe:5d:
+                    41:fb:6d:c1:7b:c0:b7:5b:5e:26:d4:65:8f:8f:cd:
+                    3d:f2:22:88:f3:84:48:84:e5:db:27:76:e3:26:d6:
+                    04:a7:63:4a:51:d9:b8:38:1e:88:62:83:a0:ec:1b:
+                    c0:ee:3c:d8:29:cc:06:61:a3:3a:a1:60:87:a5:98:
+                    f8:eb:1d:42:01:3e:f5:4f:51:f6:15:69:5f:2b:a0:
+                    e5:9e:20:9b:44:45:0d:6f:8d
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            Netscape Comment: 
+                Easy-RSA Generated Certificate
+            X509v3 Subject Key Identifier: 
+                A5:A9:F6:CE:FD:35:73:F8:AE:C1:50:D0:65:ED:5F:37:8C:F3:77:26
+            X509v3 Authority Key Identifier: 
+                keyid:41:63:DA:F5:2C:A5:F7:09:06:B0:A6:2A:F2:54:3C:69:43:60:0A:3E
+                DirName:/C=CH/ST=BE/L=Winterthur/O=inftec.ch/CN=inftec.ch CA/emailAddress=admin@inftec.ch
+                serial:C6:F4:E4:D3:C2:54:79:B9
+
+            X509v3 Extended Key Usage: 
+                TLS Web Client Authentication
+            X509v3 Key Usage: 
+                Digital Signature
+            X509v3 Subject Alternative Name: 
+                DNS:client1
+    Signature Algorithm: sha256WithRSAEncryption
+         11:f5:08:71:2d:67:60:bd:8c:cf:7b:46:14:d7:f6:39:3c:c5:
+         c5:24:63:2c:10:0e:33:e7:cf:38:3e:f2:7d:bf:cb:d1:0a:10:
+         20:97:8d:52:70:9e:d1:a3:8b:19:7f:9b:3d:fa:aa:0a:84:5c:
+         6d:60:c6:9d:b7:8c:9c:4e:d5:33:1f:e9:8c:40:cb:08:a8:a2:
+         32:69:5f:0a:82:c2:a6:a7:c7:ec:3c:a4:e7:c4:59:76:a5:7d:
+         91:3a:de:e6:c3:c3:bb:bf:38:3c:2a:e5:5f:68:23:00:e5:ca:
+         90:1b:2d:68:9e:0d:4c:e3:28:6d:f9:69:f9:63:7f:4b:2d:eb:
+         3a:86
+-----BEGIN CERTIFICATE-----
+MIIDqTCCAxKgAwIBAgIBAjANBgkqhkiG9w0BAQsFADB6MQswCQYDVQQGEwJDSDEL
+MAkGA1UECBMCQkUxEzARBgNVBAcTCldpbnRlcnRodXIxEjAQBgNVBAoTCWluZnRl
+Yy5jaDEVMBMGA1UEAxMMaW5mdGVjLmNoIENBMR4wHAYJKoZIhvcNAQkBFg9hZG1p
+bkBpbmZ0ZWMuY2gwHhcNMTUwMTAzMTkxNzQ4WhcNMjQxMjMxMTkxNzQ4WjB1MQsw
+CQYDVQQGEwJDSDELMAkGA1UECBMCQkUxEzARBgNVBAcTCldpbnRlcnRodXIxEjAQ
+BgNVBAoTCWluZnRlYy5jaDEQMA4GA1UEAxMHY2xpZW50MTEeMBwGCSqGSIb3DQEJ
+ARYPYWRtaW5AaW5mdGVjLmNoMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDV
+BMwzxIhIp60K+LOQtgBOfMKZynXBi4UO9FxjQfBAGd+Jl8kq8zJjiX/+XUH7bcF7
+wLdbXibUZY+PzT3yIojzhEiE5dsnduMm1gSnY0pR2bg4Hohig6DsG8DuPNgpzAZh
+ozqhYIelmPjrHUIBPvVPUfYVaV8roOWeIJtERQ1vjQIDAQABo4IBQjCCAT4wCQYD
+VR0TBAIwADAtBglghkgBhvhCAQ0EIBYeRWFzeS1SU0EgR2VuZXJhdGVkIENlcnRp
+ZmljYXRlMB0GA1UdDgQWBBSlqfbO/TVz+K7BUNBl7V83jPN3JjCBrAYDVR0jBIGk
+MIGhgBRBY9r1LKX3CQawpiryVDxpQ2AKPqF+pHwwejELMAkGA1UEBhMCQ0gxCzAJ
+BgNVBAgTAkJFMRMwEQYDVQQHEwpXaW50ZXJ0aHVyMRIwEAYDVQQKEwlpbmZ0ZWMu
+Y2gxFTATBgNVBAMTDGluZnRlYy5jaCBDQTEeMBwGCSqGSIb3DQEJARYPYWRtaW5A
+aW5mdGVjLmNoggkAxvTk08JUebkwEwYDVR0lBAwwCgYIKwYBBQUHAwIwCwYDVR0P
+BAQDAgeAMBIGA1UdEQQLMAmCB2NsaWVudDEwDQYJKoZIhvcNAQELBQADgYEAEfUI
+cS1nYL2Mz3tGFNf2OTzFxSRjLBAOM+fPOD7yfb/L0QoQIJeNUnCe0aOLGX+bPfqq
+CoRcbWDGnbeMnE7VMx/pjEDLCKiiMmlfCoLCpqfH7Dyk58RZdqV9kTre5sPDu784
+PCrlX2gjAOXKkBstaJ4NTOMobflp+WN/Sy3rOoY=
+-----END CERTIFICATE-----

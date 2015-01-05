@@ -23,6 +23,9 @@ node 'puppet.example.com' {
   # Nagios Server
   class { 'nagios': }
   
+  # VPN Server
+  class { 'inftec::vpn': }
+  
   # Add client1 host (manually, i.e. not with exported resources...)
   nagios::client::default{'client1':
     address => '172.16.32.11',
@@ -49,7 +52,7 @@ node 'client1.example.com' {
   class { 'inftec::dns-client':
 	nameserver => '172.16.32.10',
 	domain => 'example.com',
-  }
+  }  
 }
 
 node 'client2.example.com' { }

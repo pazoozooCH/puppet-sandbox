@@ -9,11 +9,11 @@ forge "https://forgeapi.puppetlabs.com"
 # use dependencies defined in Modulefile
 # modulefile
 
-# Modules used for Nagios setup
 # mod 'dhoppe/nagios'
 # mod 'DavidSchmitt/nagios'
 mod 'ajjahn/dns'
 mod 'puppetlabs/apache'
+mod 'luxflux/openvpn'
 
 # A module from git
 # mod 'puppetlabs-ntp',

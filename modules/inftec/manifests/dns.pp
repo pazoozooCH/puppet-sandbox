@@ -14,7 +14,7 @@ class inftec::dns {
 		nameservers => ['ns1']
   }
 	
-	# A Records:
+	# A Records (domain name to IP mappings)
 	dns::record::a {
 		'ns1':
 			zone => 'example.com',
@@ -24,11 +24,15 @@ class inftec::dns {
 			data => ['172.16.32.11'];
 	}
 	
-	# CNAME records
-  dns::record::cname { 'c1cname':
-    zone => 'example.com',
-    data => 'c1a.example.com',
-  }
+	# CNAME records (domain name aliases)
+	dns::record::cname { 'c1cname':
+		zone => 'example.com',
+		data => 'c1a.example.com',
+	}
+	dns::record::cname { 'nagios':
+		zone => 'example.com',
+		data => 'puppet.example.com',
+	}
 	
 	# Open firewall port
 	firewall { '210 allow dns access':

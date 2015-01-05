@@ -4,6 +4,7 @@ class inftec::apache (
 	$fwHttpsOpen = true,
 ) {
 	class { '::apache':
+		default_vhost => false,
 		docroot => '/var/www/html', # Defaults to /var/www in Puppet
 		mpm_module => 'prefork', # Needed for the PHP mod
 		
@@ -14,14 +15,77 @@ class inftec::apache (
 		
 		require => Package['nagios3'], # Make sure apache is configured after nagios
 	}
+	# Set up a redirecting vHost that forwards all http traffic to https
+	apache::vhost { 'puppet.example.com':
+		port => 80,
+		docroot => '/var/www/html',
+		redirect_source => '/',
+		redirect_dest => 'https://puppet.example.com/',
+	}
 	
-	# Set up an SSL vHost
+	/* Not using DNS to distinguish between apps as it makes things more complicated...
+	# Set up a vHost for nagios.example.com, using https
+	apache::vhost { 'nagios.example.com':
+		port => 443,
+		ssl => true,
+		docroot => '/var/www/html2', # TODO: Not really needed...
+		# proxy_dest => 'https://puppet.example.com/nagios3/',
+		
+		# Redirect / to /nagios3
+		#redirect_source => '/',
+		#redirect_dest => '/nagios3/',
+		
+		# Make /nagios3 available directly at / for nagios.example.com
+		proxy_pass => [
+			{ 'path' => '/cgi-bin/nagios3', 'url' => 'http://puppet.example.com/nagios3/cgi-bin' },
+			{ 'path' => '/nagios3', 'url' => 'http://puppet.example.com/nagios3/' },
+			{ 'path' => '/', 'url' => 'http://puppet.example.com/nagios3/' },
+		],
+		
+		/ *
+		# This is taken from the /etc/apache2/conf-available/nagios3.conf script
+		scriptaliases => [
+			{
+				alias => '/cgi-bin/nagios3',
+				path => '/usr/lib/cgi-bin/nagios3',
+			},
+			{
+				alias => '/nagios3/cgi-bin',
+				path => '/usr/lib/cgi-bin/nagios3',
+			},
+		],
+		aliases => [
+			{	
+				alias => '/nagios3/stylesheets',
+				path => '/etc/nagios3/stylesheets',
+			},
+			{
+				alias => '/nagios3',
+				path => '/usr/share/nagios3/htdocs',
+			},
+		],
+		directories => [
+			{
+				'path' => '
+			},
+		]
+		* /
+	}
+	*/
 	
 	# Install PHP (needed by Nagios)
 	class {'::apache::mod::php':
 		# Defaults are good for us
 		#require => Class['::apache'], # Obviously, mod dependencies are automatically resolved correctly by ::apache
 	}
+	
+	/*
+	# Install Proxy mod (needed for proxy passes)
+	class {'::apache::mod::proxy':
+		#proxy_requests => 'On',
+		#allow_from => 'all',
+	}
+	*/
 	
 	# Default www vHost on port 80
 #	apache::vhost { 'puppet.example.com':

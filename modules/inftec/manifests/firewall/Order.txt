@@ -1,0 +1,8 @@
+Rules are ordered by the comment. We use the following pattern:
+
+* Pre-Rules: 000 - 099, pre.pp
+* Post-Rules: 900 - 999, post.pp
+
+* Application default rules: 100-199, default.pp
+
+* Apache rules (http, https): 200-210, ../apache.pp

@@ -1,5 +1,8 @@
 # Set up Apache Web Server
-class inftec::apache {
+class inftec::apache (
+	$fwHttpOpen = true,
+	$fwHttpsOpen = true,
+) {
 	class { '::apache':
 		docroot => '/var/www/html', # Defaults to /var/www in Puppet
 		mpm_module => 'prefork', # Needed for the PHP mod
@@ -30,5 +33,21 @@ class inftec::apache {
 	apache::custom_config { 'nagios3':
 		source => '/etc/apache2/conf-available/nagios3.conf',
 		require => Class['::apache'],
+	}
+	
+	# Configure Firewall
+	if $fwHttpOpen {
+		firewall { '200 allow http access':
+			port   => 80,
+			proto  => tcp,
+			action => accept,
+		}
+	}
+	if $fwHttpsOpen {
+		firewall { '201 allow https access':
+			port   => 443,
+			proto  => tcp,
+			action => accept,
+		}
 	}
 }

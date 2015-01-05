@@ -14,6 +14,7 @@ forge "https://forgeapi.puppetlabs.com"
 mod 'ajjahn/dns'
 mod 'puppetlabs/apache'
 mod 'luxflux/openvpn'
+mod 'puppetlabs/firewall'
 
 # A module from git
 # mod 'puppetlabs-ntp',

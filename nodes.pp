@@ -2,8 +2,19 @@
 # nodes.pp - defines all puppet nodes
 #
 
+# Load default firewall rules for all nodes
+node basenode {
+	# Purge non-managed (IPv4) firewall rules
+	resources { 'firewall':
+		purge => true,
+	}
+
+	# Load default firewall rules
+	class { 'inftec::firewall::default': }
+}
+
 # self-manage the puppet master server
-node 'puppet.example.com' {
+node 'puppet.example.com' inherits basenode {
   # Configure the DNS server
   class { 'inftec::dns': }
   

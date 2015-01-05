@@ -29,4 +29,11 @@ class inftec::dns {
     zone => 'example.com',
     data => 'c1a.example.com',
   }
+	
+	# Open firewall port
+	firewall { '210 allow dns access':
+		port => [53],
+		proto => udp,
+		action => accept,
+	}
 }

@@ -15,6 +15,13 @@ node basenode {
 
 # self-manage the puppet master server
 node 'puppet.example.com' inherits basenode {
+	# Open puppet port
+	firewall { '150 allow puppet access':
+		port => 8140,
+		proto => tcp,
+		action => accept,
+	}
+
   # Configure the DNS server
   class { 'inftec::dns': }
   

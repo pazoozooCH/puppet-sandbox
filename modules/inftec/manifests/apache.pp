@@ -23,6 +23,18 @@ class inftec::apache (
 		redirect_dest => 'https://puppet.example.com/',
 	}
 	
+	# Set up a proxy for 'wiki.example.com'
+	apache::vhost { 'wiki.example.com':
+		port => 443,
+		ssl => true,
+		docroot => '/var/www/html', # TODO: Not really needed...
+		
+		proxy_pass => [
+			# Proxy pass for JIRA
+			{ 'path' => '/', 'url' => 'http://client1.example.com:8080/' },
+		],
+	}
+	
 	/* Not using DNS to distinguish between apps as it makes things more complicated...
 	# Set up a vHost for nagios.example.com, using https
 	apache::vhost { 'nagios.example.com':

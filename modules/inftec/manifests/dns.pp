@@ -33,6 +33,10 @@ class inftec::dns {
 		zone => 'example.com',
 		data => 'puppet.example.com',
 	}
+	dns::record::cname { 'wiki':
+		zone => 'example.com',
+		data => 'puppet.example.com',
+	}
 	
 	# Open firewall port
 	firewall { '210 allow dns access':

@@ -70,7 +70,10 @@ node 'client1.example.com' {
   class { 'inftec::dns-client':
 	nameserver => '172.16.32.10',
 	domain => 'example.com',
-  }  
+  }
+  
+  # Install and configure Docker
+  class { 'inftec::docker::client1': }
 }
 
 node 'client2.example.com' { }

@@ -18,5 +18,6 @@ class inftec::dns-client(
 	
 	exec {'resolvconf':
 		command => '/sbin/resolvconf -u',
+		refreshonly => true,
 	}
 }

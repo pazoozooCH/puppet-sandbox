@@ -15,6 +15,7 @@ mod 'ajjahn/dns'
 mod 'puppetlabs/apache'
 mod 'luxflux/openvpn'
 mod 'puppetlabs/firewall'
+mod 'garethr/docker'
 
 # A module from git
 # mod 'puppetlabs-ntp',

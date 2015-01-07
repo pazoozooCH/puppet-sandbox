@@ -44,6 +44,9 @@ node 'puppet.example.com' inherits basenode {
   # VPN Server
   class { 'inftec::vpn': }
   
+  # LDAP Server
+  # class { 'inftec::ldap': }
+  
   # Add client1 host (manually, i.e. not with exported resources...)
   nagios::client::default{'client1':
     address => '172.16.32.11',

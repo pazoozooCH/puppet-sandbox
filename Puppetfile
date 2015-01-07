@@ -16,6 +16,8 @@ mod 'puppetlabs/apache'
 mod 'luxflux/openvpn'
 mod 'puppetlabs/firewall'
 mod 'garethr/docker'
+# mod 'torian/ldap'
+mod 'datacentred/ldap'
 
 # A module from git
 # mod 'puppetlabs-ntp',

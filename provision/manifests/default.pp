@@ -13,10 +13,12 @@ class { 'puppet::client': }
 class { 'networking': }
 
 if $hostname == 'puppet' {
-  class { 'puppet::server': 
-    require => Class['networking'],
-  }
-  
-  # Provision librarian-puppet to handle puppet modules from puppet forge
-  class { 'puppet::librarian': }
+	# Set up puppetmaster
+	class { 'puppet::server': 
+		require => Class['networking'],
+		before => Class['puppet::client'],
+	} ->
+	
+	# Provision librarian-puppet to handle puppet modules from puppet forge
+	class { 'puppet::librarian': }
 }

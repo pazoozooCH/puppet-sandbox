@@ -8,7 +8,8 @@ class nagios::service {
     
 	# TODO: Configure password...
 	exec { 'nagios-password':
-	    command     => "/usr/bin/htpasswd -bc /etc/nagios3/htpasswd.users nagiosadmin password",
+		command     => "/usr/bin/htpasswd -bc /etc/nagios3/htpasswd.users nagiosadmin password",
+		unless => "/usr/bin/htpasswd -bv /etc/nagios3/htpasswd.users nagiosadmin password",
 	}
 	
     service { 'nagios3':

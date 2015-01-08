@@ -1,0 +1,10 @@
+---
+:backends:
+  - yaml
+:yaml:
+  :datadir: /etc/puppet/hieradata
+:hierarchy:
+  - "%{::domain}/%{::fqdn}"
+  # Couldn't define %{::domain}/%{::domain}, would result in interpolation loop warning... :-(
+  - "%{::domain}/domain"
+  - common

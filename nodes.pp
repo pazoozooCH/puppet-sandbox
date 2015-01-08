@@ -11,6 +11,12 @@ node basenode {
 
 	# Load default firewall rules
 	class { 'inftec::firewall::default': }
+	
+	# Configure the DNS client
+	class { 'inftec::dns-client':
+		nameserver => hiera('ipPuppetMaster'),
+		domain => $domain,
+	}
 }
 
 # self-manage the puppet master server
@@ -27,12 +33,6 @@ node 'master.inftec-vagrant.ch' inherits basenode {
   
   # Configure SSL
   class { 'inftec::ssl': }
-  
-  # Configure the DNS client
-  class { 'inftec::dns-client':
-	nameserver => '172.16.32.10',
-	domain => 'example.com',
-  }
 
   # Configure Apache
   class { 'inftec::apache':
@@ -68,12 +68,6 @@ node 'client1.example.com' {
   
   # Nagios Client
   class { 'nagios::nrpe':}
-  
-  # Configure the DNS client
-  class { 'inftec::dns-client':
-	nameserver => '172.16.32.10',
-	domain => 'example.com',
-  }
   
   # Install and configure Docker
   class { 'inftec::docker::client1': }

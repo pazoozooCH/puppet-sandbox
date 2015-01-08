@@ -37,35 +37,13 @@ class puppet::server {
 	} ->
 	
 	# Set up Hiera
+	class {'hiera':
+	} ->
 	
-	# Copy hieradata folder
-	file { '/etc/puppet/hieradata':
-		ensure  => directory,
-		source  => '/vagrant/hieradata',
-		recurse => true,
-		owner   => 'puppet',
-		group   => 'puppet',
-		mode    => '0644',
-		replace => true,
-	} ->
-	# Copy hiera config to /etc/puppet, replace if necessary
-	file { '/etc/puppet/hiera.yaml':
-		ensure  => present,
-		source  => '/vagrant/hiera.yaml',
-		replace => true,
-	require => File['/etc/puppet/hieradata'],
-	} ->
-	# Make symbolic link to /etc/hiera.yaml so we can use the hiera command without explicitly specifying a config file
-	file { '/etc/hiera.yaml':
-		ensure  => link,
-		target  => '/etc/puppet/hiera.yaml',
-		owner   => 'puppet',
-		group   => 'puppet',
-		mode    => '0644',
-	} ->
 	# Finally, start the puppetmaster service
 	service { 'puppetmaster':
 		enable => true,
 		ensure => running,
+		subscribe => File ['/etc/puppet/hiera.yaml'],
 	}
 }

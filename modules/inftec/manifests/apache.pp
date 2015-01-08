@@ -16,11 +16,11 @@ class inftec::apache (
 		require => Package['nagios3'], # Make sure apache is configured after nagios
 	}
 	# Set up a redirecting vHost that forwards all http traffic to https
-	apache::vhost { 'puppet.example.com':
+	apache::vhost { "$fqdn":
 		port => 80,
 		docroot => '/var/www/html',
 		redirect_source => '/',
-		redirect_dest => 'https://puppet.example.com/',
+		redirect_dest => "https://$fqdn/",
 	}
 	
 	# Set up a proxy for 'wiki.example.com'

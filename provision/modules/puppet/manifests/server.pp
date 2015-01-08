@@ -62,7 +62,6 @@ class puppet::server {
 		owner   => 'puppet',
 		group   => 'puppet',
 		mode    => '0644',
-		require => File['/etc/puppet/hiera.yaml'],
 	} ->
 	# Finally, start the puppetmaster service
 	service { 'puppetmaster':

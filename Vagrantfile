@@ -1,10 +1,10 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-domain = 'example.com'
+domain = 'inftec-vagrant.ch'
 
 puppet_nodes = [
-  {:hostname => 'puppet',  :ip => '172.16.32.10', :box => 'codezomb/trusty64', :fwdhost => 8140, :fwdguest => 8140, :ram => 512},
+  {:hostname => 'master',  :ip => '172.16.32.10', :box => 'codezomb/trusty64', :fwdhost => 8140, :fwdguest => 8140, :ram => 512},
   {:hostname => 'client1', :ip => '172.16.32.11', :box => 'codezomb/trusty64', :ram => 2048},
   {:hostname => 'client2', :ip => '172.16.32.12', :box => 'codezomb/trusty64'},
 ]
@@ -32,9 +32,12 @@ Vagrant.configure("2") do |config|
 	  #VMWare customization
 	  node_config.vm.provider :vmware_workstation do |v|
         v.vmx["memsize"] = memory.to_s
+		v.vmx['displayname'] = node[:hostname]
 	  end
       
 
+	  # Make sure puppet client is installed
+	  node_config.vm.provision :shell, :path => "provision/shell/installPuppetClient.sh"
 	  
       node_config.vm.provision :puppet do |puppet|
         puppet.manifests_path = 'provision/manifests'

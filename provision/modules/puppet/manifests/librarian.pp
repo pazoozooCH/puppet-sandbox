@@ -23,32 +23,20 @@ class puppet::librarian {
 
   package { ['ruby-all-dev'] :
     ensure => installed,
-  }
-  
+  } ->
   package { ['librarian-puppet'] :
     ensure => installed,
 	provider => 'gem',
-	require => Package['ruby-all-dev'],
-  }
-  
+  } ->
   file { '/tmp/librarian-puppet':
     ensure => 'directory',
-  }
-  
+  } ->  
   file { '/tmp/librarian-puppet/Puppetfile':
     source => '/vagrant/Puppetfile',
-	require => File['/tmp/librarian-puppet'],
-  }
-  
+  } ->
   exec { 'librarian-puppet':
     command => '/usr/local/bin/librarian-puppet install --path=/etc/puppet/modules',
-    #command => '/usr/bin/whoami',
-	#'echo whoami && /usr/local/bin/librarian-puppet install --path=/etc/puppet/modules',
 	cwd => '/tmp/librarian-puppet',
 	logoutput => true,
-	require => [
-	  File['/tmp/librarian-puppet/Puppetfile'],
-	  Package['librarian-puppet'],
-	],
   }
 }

@@ -1,3 +1,9 @@
 ---
 # IP of puppet master
 ipPuppetMaster: 172.16.32.10
+
+# Hash containing the DNS A entries
+# The outer hash contains another hash with detail information
+inftec::dns::a-records:
+  client1: {zone: "%{::domain}", data: 172.16.32.11}
+  client2: {zone: "%{::domain}", data: 172.16.32.12}

@@ -7,6 +7,7 @@ class puppet::hiera {
 		source  => 'puppet:///modules/puppet/hieradata',
 		recurse => true,
 		purge => true,
+		force => true, # Needed to purge empty directories
 		owner   => 'puppet',
 		group   => 'puppet',
 		mode    => '0644',

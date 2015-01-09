@@ -8,12 +8,34 @@ class inftec::dns {
 	}
 
 	# Forward Zone
-	dns::zone { 'example.com':
-		soa         => 'ns1.example.com',
-		soa_email   => 'admin.example.com',
+	dns::zone { $domain:
+		soa         => "ns1.${domain}",
+		soa_email   => "admin.${domain}",
 		nameservers => ['ns1']
-  }
+	}
 	
+	# Helper function to define a-records based on hiera hash-array (not sure if we could handle that smoother...)
+	define processA(
+		$keys,
+	) {
+		$aRecord = $keys[$name]
+		$myZone = $aRecord['zone']
+		$data = $aRecord['data']
+		#fail("${zone}")
+		dns::record::a { $name:
+			zone => "${aRecord['zone']}",
+			data => "${aRecord['data']}",
+		}
+	}
+	
+	# Load A records (domain name to IP mappings) from hiera classes
+	$aRecords = hiera_hash('inftec::dns::a-records')
+	$aRecordKeys = keys($aRecords)
+	processA { $aRecordKeys : 
+		keys => $aRecords,
+	}
+
+	/*
 	# A Records (domain name to IP mappings)
 	dns::record::a {
 		'ns1':
@@ -37,6 +59,7 @@ class inftec::dns {
 		zone => 'example.com',
 		data => 'puppet.example.com',
 	}
+	*/
 	
 	# Open firewall port
 	firewall { '210 allow dns access':

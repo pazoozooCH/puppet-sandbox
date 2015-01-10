@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Executes a puppet agent
+sudo puppet agent --test $@

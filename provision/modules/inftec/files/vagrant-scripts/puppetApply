@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Executes a puppet apply on the /vagrant/vrovision folder
+sudo puppet apply --modulepath /vagrant/provision/modules /vagrant/provision/manifests/default.pp $@

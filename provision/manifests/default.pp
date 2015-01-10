@@ -8,6 +8,9 @@ stage { 'pre': before => Stage['main'] }
 # class { 'repos':   stage => 'pre' }
 class { 'vagrant': stage => 'pre' }
 
+# Load Vagrant scripts on all nodes
+class { 'inftec::vagrant-scripts': }
+
 # Set up puppet master on master host
 if $hostname == 'master' {
 	# Set up puppetmaster

@@ -1,9 +1,21 @@
 ---
 # IP of puppet master
-ipPuppetMaster: 172.16.32.10
+ipPuppetMaster: "172.16.32.10"
 
-# Hash containing the DNS A entries
+# DNS settings
+
+inftec::dns::ipDnsServer: "%{hiera('ipPuppetMaster')}"
+
+# Hash containing the DNS entries
+# Type denotes the type:
 # The outer hash contains another hash with detail information
-inftec::dns::a-records:
-  client1: {zone: "%{::domain}", data: 172.16.32.11}
-  client2: {zone: "%{::domain}", data: 172.16.32.12}
+inftec::dns::entries:
+  # A entries (name to IP mappings)
+  master: {type: 'a', zone: "%{::domain}", data: 172.16.32.10}
+  client1: {type: 'a', zone: "%{::domain}", data: 172.16.32.11}
+  client2: {type: 'a', zone: "%{::domain}", data: 172.16.32.12}
+  
+  # CNAME entries (aliases)
+  puppet: {type: 'cname', zone: "%{::domain}", data: "master.%{::domain}"}
+  nagios: {type: 'cname', zone: "%{::domain}", data: "master.%{::domain}"}
+  www: {type: 'cname', zone: "%{::domain}", data: "master.%{::domain}"}

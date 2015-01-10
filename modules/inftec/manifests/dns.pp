@@ -1,5 +1,7 @@
 # Set up DNS server using ajjahn/dns module
-class inftec::dns {
+class inftec::dns (
+	$ipDnsServer,
+) {
 	include dns::server
 	
 	# Forwarders (Google DNS)
@@ -11,56 +13,45 @@ class inftec::dns {
 	dns::zone { $domain:
 		soa         => "ns1.${domain}",
 		soa_email   => "admin.${domain}",
-		nameservers => ['ns1']
+		nameservers => ['ns1'],
 	}
 	
-	# Helper function to define a-records based on hiera hash-array (not sure if we could handle that smoother...)
-	define processA(
-		$keys,
+	# A record for name server
+	dns::record::a {'ns1':
+		zone => "$domain",
+		data => "$ipDnsServer",
+	}
+
+	
+	# Load DNS entries from hiera (see hieradata files, e.g. inftec-vagrant.ch/domain.yaml)
+	
+	# Helper function to define DNS entries based on hiera hash-array (not sure if we could handle that smoother...)
+	define processEntries(
+		$entries,
 	) {
-		$aRecord = $keys[$name]
-		$myZone = $aRecord['zone']
-		$data = $aRecord['data']
-		#fail("${zone}")
-		dns::record::a { $name:
-			zone => "${aRecord['zone']}",
-			data => "${aRecord['data']}",
+		$entry = $entries[$name]
+		$type = $entry['type']
+		
+		if $type == 'a' {
+			dns::record::a { $name:
+				zone => "${entry['zone']}",
+				data => "${entry['data']}",
+			}
+		} elsif $type == 'cname' {
+			dns::record::cname { $name:
+				zone => "${entry['zone']}",
+				data => "${entry['data']}",
+			}
 		}
 	}
 	
 	# Load A records (domain name to IP mappings) from hiera classes
-	$aRecords = hiera_hash('inftec::dns::a-records')
-	$aRecordKeys = keys($aRecords)
-	processA { $aRecordKeys : 
-		keys => $aRecords,
+	$entries = hiera('inftec::dns::entries')
+	$entryKeys = keys($entries)
+	processEntries { $entryKeys : 
+		entries => $entries,
 	}
 
-	/*
-	# A Records (domain name to IP mappings)
-	dns::record::a {
-		'ns1':
-			zone => 'example.com',
-			data => ['172.16.32.10'];
-		'c1a':
-			zone => 'example.com',
-			data => ['172.16.32.11'];
-	}
-	
-	# CNAME records (domain name aliases)
-	dns::record::cname { 'c1cname':
-		zone => 'example.com',
-		data => 'c1a.example.com',
-	}
-	dns::record::cname { 'nagios':
-		zone => 'example.com',
-		data => 'puppet.example.com',
-	}
-	dns::record::cname { 'wiki':
-		zone => 'example.com',
-		data => 'puppet.example.com',
-	}
-	*/
-	
 	# Open firewall port
 	firewall { '210 allow dns access':
 		port => [53],
